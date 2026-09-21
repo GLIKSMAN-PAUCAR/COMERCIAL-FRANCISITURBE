@@ -470,7 +470,7 @@
 
                         clientesRaw.forEach(row => {
                             const asesor = String(getVal(row, ['ASESOR', 'Asesor']) || "").trim().toUpperCase();
-                            const cliente = String(getVal(row, ['CLIENTE', 'Cliente']) || "").trim().toUpperCase();
+                            const cliente = String(getVal(row, ['NAME CLIENT', 'CLIENTE', 'Cliente', 'name_client']) || "").trim().toUpperCase();
 
                             if (asesor === COMERCIAL_ASIGNADO.toUpperCase() && cliente) {
                                 clientesDelComericial.add(cliente);
@@ -488,7 +488,7 @@
                         // PASO 2: Cargar SOLO sedes de los clientes del comercial
                         dataSedesExtendida = [];
                         sedesRaw.forEach(row => {
-                            const c = String(getVal(row, ['CLIENTE', 'Cliente']) || "").trim().toUpperCase();
+                            const c = String(getVal(row, ['NAME CLIENT', 'CLIENTE', 'Cliente', 'name_client']) || "").trim().toUpperCase();
                             if (clientesDelComericial.has(c)) {
                                 dataSedesExtendida.push({
                                     cliente: c,
@@ -508,7 +508,7 @@
                         // PASO 3: Cargar SOLO programacion (Técnica) del comercial
                         dataProgramacionFull = [];
                         progRaw.forEach(row => {
-                            const c = String(getVal(row, ['Cliente', 'CLIENTE']) || "").trim().toUpperCase();
+                            const c = String(getVal(row, ['NAME CLIENT', 'Cliente', 'CLIENTE', 'name_client']) || "").trim().toUpperCase();
                             if (clientesDelComericial.has(c)) {
                                 let f = getVal(row, ['Dia', 'Fecha']);
                                 dataProgramacionFull.push({
@@ -527,7 +527,7 @@
                         // PASO 4: Cargar SOLO programacion (Posventa) del comercial
                         dataProgPvFull = [];
                         progPvRaw.forEach(row => {
-                            const c = String(getVal(row, ['ClientePv', 'CLIENTE']) || "").trim().toUpperCase();
+                            const c = String(getVal(row, ['ClientePv', 'NAME CLIENT', 'CLIENTE', 'name_client']) || "").trim().toUpperCase();
                             if (clientesDelComericial.has(c)) {
                                 let f = getVal(row, ['DiaPv', 'Fecha']);
                                 let idProg = String(getVal(row, ['nProgramPv', 'ID']) || "S/ID").trim();
@@ -557,7 +557,7 @@
                         // PASO 5: Cargar SOLO comodatos (Equipos) del comercial
                         dataComodatoFull = [];
                         comodRaw.forEach(row => {
-                            const c = String(getVal(row, ['CLIENTE']) || "").trim().toUpperCase();
+                            const c = String(getVal(row, ['CLIENTE', 'NAME CLIENT', 'name_client']) || "").trim().toUpperCase();
                             if (clientesDelComericial.has(c)) {
                                 let f = getVal(row, ['INSTALACION']);
                                 const eqId = String(getVal(row, ['IDENEQUIPO', 'EQUIPOID']) || "-").trim();
